@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicky | IT Support & Developer Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            margin-top: 10px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 2rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .skill-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-left: 4px solid var(--secondary-color);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .project-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .project-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .tag {
+            display: inline-block;
+            background: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 3rem;
+        }
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Vicky</h1>
+        <p>IT Support Specialist | Network Automation | Web Developer</p>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <h2>Tentang Saya</h2>
+            <p>Profesional IT dengan keahlian komprehensif dalam menjaga keandalan infrastruktur ritel. Tidak hanya berfokus pada penyelesaian masalah perangkat keras dan aplikasi Point of Sales (POS), saya juga mengembangkan solusi otomatisasi dan pemantauan sistem skala besar. Misi saya adalah menjembatani dukungan teknis operasional harian dengan inovasi perangkat lunak untuk efisiensi bisnis.</p>
+        </section>
+
+        <section id="skills">
+            <h2>Keahlian Teknis</h2>
+            <div class="skills-grid">
+                <div class="skill-card">Hardware & POS Troubleshooting</div>
+                <div class="skill-card">Instalasi & Maintenance CCTV</div>
+                <div class="skill-card">MySQL Database Management</div>
+                <div class="skill-card">Python (Automation)</div>
+                <div class="skill-card">PHP (Laravel Framework)</div>
+                <div class="skill-card">Network Administration</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Proyek & Pencapaian</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <h3>Sistem Otomasi Pemantauan Jaringan Toko Ritel</h3>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">Telegram API</span>
+                        <span class="tag">Networking</span>
+                    </div>
+                    <p>Mendevelop skrip otomasi untuk memantau konektivitas jaringan secara <i>real-time</i> di 375 cabang ritel. Sistem ini terintegrasi dengan Bot Telegram untuk memberikan notifikasi instan ketika terjadi <i>downtime</i>, memangkas waktu respons IT Support secara drastis.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Web Dashboard Monitoring IT Support</h3>
+                    <div>
+                        <span class="tag">PHP Laravel</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Web Development</span>
+                    </div>
+                    <p>Membangun dasbor berbasis web sentral menggunakan Laravel untuk memvisualisasikan status kesehatan infrastruktur IT seluruh toko, mempermudah pelacakan aset, dan pelaporan kendala teknis harian.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Optimalisasi Infrastruktur Retail Harian</h3>
+                    <div>
+                        <span class="tag">POS</span>
+                        <span class="tag">CCTV</span>
+                        <span class="tag">Hardware</span>
+                    </div>
+                    <p>Menangani pemeliharaan rutin, perbaikan <i>database</i> lokal (MySQL), dan konfigurasi ulang perangkat vital toko seperti mesin kasir, <i>barcode scanner</i>, <i>thermal printer</i>, dan DVR/NVR CCTV untuk memastikan operasional tanpa hambatan.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Kontak</h2>
+            <p>Tertarik untuk berdiskusi tentang peluang karir atau proyek teknologi? Hubungi saya melalui:</p>
+            <ul>
+                <li><strong>Email:</strong> alldi.restu@gmail.com</li>
+                <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/restuarifaldy" target="_blank">linkedin.com/in/usernamekamu</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/Res14" target="_blank">github.com/usernamekamu</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Restu Arifaldy. Dibuat dengan HTML & CSS.</p>
+    </footer>
+
+</body>
+</html>
