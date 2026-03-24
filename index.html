@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restu | IT Support Specialist & Developer</title>
+    <title>Restu Arifaldy | IT Support Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,356 +11,143 @@
     <style>
         /* --- Variabel & Reset --- */
         :root {
-            --primary: #0f172a; /* Deep Navy */
-            --secondary: #3b82f6; /* Electric Blue */
-            --accent: #22d3ee; /* Cyan accent */
+            --primary: #0f172a; 
+            --secondary: #3b82f6; 
+            --accent: #22d3ee; 
             --bg: #f8fafc;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --glass: rgba(255, 255, 255, 0.8);
+            --glass: rgba(255, 255, 255, 0.85);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.8;
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; scroll-behavior: smooth; overflow-x: hidden; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
-
-        /* --- Utilitas --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
         section { padding: 5rem 0; }
 
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 3rem;
-            position: relative;
+            text-align: center; font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 3rem; position: relative;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(to right, var(--secondary), var(--accent)); margin: 10px auto 0; border-radius: 2px;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
-            margin: 10px auto 0;
-            border-radius: 2px;
+        /* --- Animasi Dasar (Keyframes) --- */
+        @keyframes float {
+            0% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+            50% { transform: translateY(-15px); box-shadow: 0 25px 15px rgba(0,0,0,0.1); }
+            100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Reveal Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* --- Navigasi --- */
         nav {
-            background-color: var(--glass);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-color: var(--glass); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
+        .nav-content { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
         .logo span { color: var(--secondary); }
-
         .nav-links { display: flex; gap: 2rem; }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--text-main);
-            font-size: 0.95rem;
+        .nav-links a { font-weight: 500; color: var(--text-main); font-size: 0.95rem; position: relative; }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--secondary); transition: width 0.3s ease;
         }
+        .nav-links a:hover::after { width: 100%; }
 
-        .nav-links a:hover { color: var(--secondary); }
-
-        /* --- Hero Section (Updated with Profile Pic) --- */
+        /* --- Hero Section --- */
         .hero {
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            color: white;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding-top: 70px; /* offset for nav */
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .profile-pic {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--secondary);
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 2rem;
-            transition: var(--transition);
-        }
-
-        .profile-pic:hover {
-            transform: scale(1.05);
-            border-color: var(--accent);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(to right, var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 700px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
-            color: white;
-            font-weight: 600;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-        }
-
-        /* --- About --- */
-        .about-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        /* --- Skills --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(59, 130, 246, 0.2);
-        }
-
-        .skill-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            background-color: rgba(59, 130, 246, 0.1);
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-        }
-
-        .skill-text h3 { font-size: 1.1rem; color: var(--primary); }
-        .skill-text p { font-size: 0.9rem; color: var(--text-muted); }
-
-        /* --- Projects & Repair Gallery (Updated) --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-header {
-            height: 8px;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
-        }
-
-        .project-body {
-            padding: 2rem;
-            flex-grow: 1;
-        }
-
-        .project-body i {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .project-body h3 {
-            font-size: 1.3rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-body p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-        .tag {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--secondary);
-            background-color: rgba(59, 130, 246, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-        }
-
-        /* Repair Gallery Card (New) */
-        .repair-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-
-        .repair-img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: var(--transition);
+            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            color: white; min-height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 70px; position: relative; overflow: hidden;
         }
         
-        .repair-img:hover {
-            transform: scale(1.1);
-            z-index: 10;
+        /* Dekorasi Glow di Background */
+        .hero::before {
+            content: ''; position: absolute; width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); filter: blur(100px); border-radius: 50%; top: 20%; left: 50%; transform: translateX(-50%); z-index: 0;
         }
 
-        /* --- Contact --- */
-        .contact-card {
-            background: linear-gradient(to right bottom, #1e293b, #0f172a);
-            color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
+        .hero-content { display: flex; flex-direction: column; align-items: center; z-index: 1; width: 100%; }
+        
+        /* Animasi Profil */
+        .profile-pic {
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary); margin-bottom: 2rem;
+            animation: float 4s ease-in-out infinite; 
         }
 
+        .hero h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+        .hero h1 span { background: linear-gradient(to right, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .typewriter-container { font-size: 1.25rem; color: var(--accent); margin-bottom: 1rem; height: 30px; font-weight: 600; }
+        .typing-text::after { content: '|'; animation: blink 0.7s infinite; color: white; }
+
+        .hero p { font-size: 1rem; color: #94a3b8; margin-bottom: 2.5rem; max-width: 600px; }
+        
+        .btn {
+            display: inline-block; padding: 0.8rem 2.5rem; background: linear-gradient(to right, var(--secondary), var(--accent)); color: white; font-weight: 600; border-radius: 50px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); border: none; cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
+
+        /* --- Kartu & Grid --- */
+        .about-card { background: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid rgba(0,0,0,0.03); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .skill-item { background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); transition: var(--transition); display: flex; align-items: center; gap: 1.5rem; border: 1px solid rgba(0,0,0,0.03); }
+        .skill-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: rgba(59, 130, 246, 0.3); }
+        .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+        .skill-text h3 { font-size: 1.1rem; color: var(--primary); }
+        .skill-text p { font-size: 0.9rem; color: var(--text-muted); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .project-header { height: 8px; background: linear-gradient(to right, var(--secondary), var(--accent)); }
+        .project-body { padding: 2rem; flex-grow: 1; }
+        .project-body i { font-size: 1.5rem; color: var(--secondary); margin-bottom: 1rem; }
+        .project-body h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .project-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { font-size: 0.75rem; font-weight: 600; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); padding: 0.3rem 0.8rem; border-radius: 50px; }
+        
+        /* Repair Gallery */
+        .repair-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+        .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); }
+        .repair-img:hover { transform: scale(1.1); z-index: 10; box-shadow: var(--shadow-lg); cursor: pointer;}
+
+        /* Contact */
+        .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; text-align: center; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+        .contact-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 50%); z-index: 0; }
+        .contact-card > * { position: relative; z-index: 1; }
         .contact-card h2 { color: white; border: none; margin-top: 0; }
-        .contact-card h2::after { margin-bottom: 2rem;}
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 1.5rem;
-            background-color: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            font-weight: 500;
-        }
-
-        .contact-btn:hover {
-            background-color: rgba(255,255,255,0.1);
-            transform: translateY(-3px);
-            border-color: var(--accent);
-        }
-
+        .contact-card h2::after { margin-bottom: 2rem; }
+        .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+        .contact-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.5rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-weight: 500; }
+        .contact-btn:hover { background-color: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: var(--accent); }
         .contact-btn i { color: var(--accent); font-size: 1.2rem; }
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid rgba(0,0,0,0.05); }
 
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* --- Responsif (Mobile) --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
-            .nav-links { display: none; } /* Simpel: sembunyikan nav di mobile */
+            .nav-links { display: none; }
             .about-card, .skill-item, .project-body, .contact-card { padding: 1.5rem; }
-            .profile-pic { width: 120px; height: 120px; }
+            .profile-pic { width: 130px; height: 130px; }
         }
     </style>
 </head>
@@ -368,7 +155,7 @@
 
     <nav>
         <div class="container nav-content">
-            <div class="logo">Restu<span>.</span>IT</div>
+            <div class="logo">RESTU<span>.</span>IT</div>
             <ul class="nav-links">
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#skills">Keahlian</a></li>
@@ -380,15 +167,20 @@
 
     <header class="hero">
         <div class="container hero-content">
-            <img src="profile.jpg" alt="Restu Arifaldy - IT Support" class="profile-pic" onerror="this.src='https://placehold.co/160x160?text=Vicky'">
+            <img src="profile.jpg" alt="Restu Arifaldy" class="profile-pic" onerror="this.src='https://placehold.co/160x160/3b82f6/white?text=RA'">
             <h1>Hi, Saya <span>Restu</span></h1>
-            <p>IT Support di Ritel Skala Besar yang juga mendevelop solusi otomasi jaringan dengan Python & MySQL.</p>
-            <a href="#contact" class="btn">Hubungi Saya</a>
+            
+            <div class="typewriter-container">
+                <span class="typing-text"></span>
+            </div>
+
+            <p class="reveal">Menjembatani masalah perangkat keras operasional harian dengan inovasi perangkat lunak menggunakan Python & MySQL di industri ritel.</p>
+            <a href="#contact" class="btn reveal">Mari Berkolaborasi</a>
         </div>
     </header>
 
     <div class="container">
-        <section id="about">
+        <section id="about" class="reveal">
             <div class="about-card">
                 <h2 class="section-title">Tentang Saya</h2>
                 <p>Saya adalah profesional IT yang berfokus pada keandalan infrastruktur ritel. Tidak hanya menangani masalah harian pada aplikasi POS, Komputer, dan CCTV, saya memiliki <i>passion</i> dalam efisiensi.</p>
@@ -396,132 +188,68 @@
             </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" class="reveal">
             <h2 class="section-title">Keahlian Teknis</h2>
             <div class="skills-grid">
-                
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-cash-register"></i></div>
-                    <div class="skill-text">
-                        <h3>POS & Retail Hardware</h3>
-                        <p>Troubleshooting PC Kasir, Printer Thermal, Scanner.</p>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-database"></i></div>
-                    <div class="skill-text">
-                        <h3>MySQL Management</h3>
-                        <p>Maintenance, Query, & Perbaikan Error Database POS.</p>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-video"></i></div>
-                    <div class="skill-text">
-                        <h3>CCTV System</h3>
-                        <p>Instalasi, Konfigurasi DVR/NVR, & Maintenance.</p>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-python"></i></div>
-                    <div class="skill-text">
-                        <h3>Python Automation</h3>
-                        <p>Scripting untuk monitoring jaringan & tugas berulang.</p>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fab fa-laravel"></i></div>
-                    <div class="skill-text">
-                        <h3>Laravel Web Dev</h3>
-                        <p>Membangun Dashboard Monitoring & Tools IT internal.</p>
-                    </div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
-                    <div class="skill-text">
-                        <h3>Networking</h3>
-                        <p>Dasar LAN, WLAN, & Monitoring 375+ Cabang.</p>
-                    </div>
-                </div>
-
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fas fa-cash-register"></i></div><div class="skill-text"><h3>POS & Hardware</h3><p>Troubleshooting PC Kasir & Periferal.</p></div></div>
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fas fa-database"></i></div><div class="skill-text"><h3>MySQL Database</h3><p>Query & Perbaikan Error Database.</p></div></div>
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fas fa-video"></i></div><div class="skill-text"><h3>CCTV System</h3><p>Konfigurasi DVR/NVR & Maintenance.</p></div></div>
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-text"><h3>Python Scripting</h3><p>Otomasi monitoring jaringan ritel.</p></div></div>
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fab fa-laravel"></i></div><div class="skill-text"><h3>PHP Laravel</h3><p>Dashboard Monitoring & Tools Internal.</p></div></div>
+                <div class="skill-item reveal"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-text"><h3>Networking</h3><p>Maintenance LAN, WLAN 375+ Cabang.</p></div></div>
             </div>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="reveal">
             <h2 class="section-title">Proyek & Pencapaian</h2>
             <div class="projects-grid">
                 
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-network-wired"></i>
-                        <h3>Otomasi Monitoring Jaringan (375 Toko)</h3>
+                        <h3>Otomasi Monitoring (375 Toko)</h3>
                         <p>Mendevelop script Python yang memantau konektivitas ratusan cabang secara real-time dan mengirim notifikasi downtime instan.</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Bot Telegram API</span>
-                            <span class="tag">ICMP</span>
-                        </div>
+                        <div class="tags"><span class="tag">Python</span><span class="tag">Bot Telegram API</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-chart-line"></i>
                         <h3>IT Support Web Dashboard</h3>
-                        <p>Membangun aplikasi web central berbasis Laravel untuk memvisualisasikan status kesehatan IT seluruh toko dan pelaporan kendala.</p>
-                        <div class="tags">
-                            <span class="tag">PHP Laravel</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">Bootstrap</span>
-                        </div>
+                        <p>Membangun aplikasi web central berbasis Laravel untuk memvisualisasikan status kesehatan IT seluruh toko.</p>
+                        <div class="tags"><span class="tag">PHP Laravel</span><span class="tag">MySQL</span></div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-tools"></i>
-                        <h3>Optimalisasi & Perbaikan Hardware</h3>
-                        
+                        <h3>Maintenance Hardware</h3>
                         <div class="repair-gallery">
                             <img src="repair1.jpg" alt="Perbaikan 1" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC+Inside'">
                             <img src="repair2.jpg" alt="Perbaikan 2" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=Cable+Mgmt'">
-                            <img src="repair3.jpg" alt="Perbaikan 3" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS+Printer'">
+                            <img src="repair3.jpg" alt="Perbaikan 3" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
-
                         <p>Contoh hasil perbaikan hardware ritel: Pembersihan internal PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
-                        <div class="tags">
-                            <span class="tag">PC Repair</span>
-                            <span class="tag">Maintenance</span>
-                            <span class="tag">Retail IT</span>
-                        </div>
+                        <div class="tags"><span class="tag">PC Repair</span><span class="tag">Retail IT</span></div>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <section id="contact">
+        <section id="contact" class="reveal">
             <div class="contact-card">
                 <h2 class="section-title">Mari Berkolaborasi</h2>
-                <p>Tertarik untuk membahas peluang kerja? Hubungi saya.</p>
-                
+                <p>Tertarik untuk membahas peluang kerja atau proyek otomatisasi IT? Hubungi saya.</p>
                 <div class="contact-links">
-                    <a href="mailto:emailkamu@gmail.com" class="contact-btn">
-                        <i class="fas fa-envelope"></i> alldi.restu@gmail.com
-                    </a>
-                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/Res14" target="_blank" class="contact-btn">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
+                    <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/Res14" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </section>
@@ -529,9 +257,6 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy❤️.</p>
+            <p>&copy; 2026 Restu Arifaldy ☕.</p>
         </div>
     </footer>
-
-</body>
-</html>
