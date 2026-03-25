@@ -49,8 +49,8 @@
         }
 
         /* --- Kursor Custom --- */
-        .cursor-dot { width: 8px; height: 8px; background-color: var(--secondary); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none; transition: width 0.2s, height 0.2s; }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--secondary); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10002; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10001; pointer-events: none; transition: width 0.2s, height 0.2s; }
         
         /* Sembunyikan kursor custom di HP */
         @media (pointer: coarse) {
@@ -111,7 +111,6 @@
         .about-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.5); }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
         
-        /* Modifikasi untuk efek Tilt */
         .skill-item { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; border: 1px solid rgba(255,255,255,0.6); transform-style: preserve-3d; }
         .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; transform: translateZ(30px); }
         .skill-text { transform: translateZ(20px); }
@@ -126,9 +125,10 @@
         .project-body h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem; }
         .project-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
         
+        /* Galeri Perbaikan */
         .repair-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
         .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; transition: var(--transition); border: 1px solid #eee; }
-        .repair-img:hover { transform: scale(1.1); z-index: 10; position: relative;}
+        .repair-img:hover { transform: scale(1.05); cursor: pointer; z-index: 10; position: relative; box-shadow: var(--shadow-md); border-color: var(--secondary);}
 
         .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; text-align: center; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
         .contact-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 50%); z-index: 0; }
@@ -141,11 +141,33 @@
 
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; position: relative; z-index: 10;}
 
+        /* --- CSS LIGHTBOX / MODAL GAMBAR --- */
+        .modal {
+            display: none; /* Disembunyikan secara default */
+            position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.9); /* Latar belakang gelap */
+            backdrop-filter: blur(5px); /* Efek blur di belakang modal */
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal.show { display: flex; justify-content: center; align-items: center; opacity: 1; }
+        .modal-content {
+            max-width: 90%; max-height: 85vh; border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid var(--secondary);
+            transform: scale(0.8); transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content { transform: scale(1); }
+        .close-modal {
+            position: absolute; top: 20px; right: 40px; color: white;
+            font-size: 40px; font-weight: bold; transition: 0.3s;
+        }
+        .close-modal:hover, .close-modal:focus { color: var(--accent); text-decoration: none; cursor: pointer; transform: scale(1.1); }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
             .logo-iconic { font-size: 1.3rem; }
-            .ambient-glow { display: none; } /* Matikan glow di HP agar tidak berat */
+            .ambient-glow { display: none; } 
+            .close-modal { top: 10px; right: 20px; }
         }
     </style>
 </head>
@@ -156,6 +178,11 @@
 
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
+
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="expandedImg" alt="Foto Diperbesar">
+    </div>
 
     <nav>
         <div class="container nav-content">
@@ -236,7 +263,6 @@
                         <div class="repair-gallery">
                             <img src="repair1.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
                             <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
-                            <img src="repair3.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
                         <p>Contoh perbaikan hardware ritel: Pembersihan PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
                     </div>
@@ -249,9 +275,9 @@
                 <h2 class="section-title" style="color:white;">Mari Berkolaborasi</h2>
                 <p>Tertarik untuk membahas peluang kerja atau proyek otomatisasi IT ritel? Hubungi saya.</p>
                 <div class="contact-links">
-                    <a href="mailto:alldi.restu@gmail.com" class="contact-btn" data-cursor-hover><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn" data-cursor-hover><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/restuarifaldy" target="_blank" class="contact-btn" data-cursor-hover><i class="fab fa-github"></i> GitHub</a>
+                    <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </section>
@@ -259,7 +285,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy.Code.</p>
+            <p>&copy; 2026 Restu Arifaldy. Crafted with Poppins & Code.</p>
         </div>
     </footer>
 
@@ -272,7 +298,6 @@
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             
-            // Cek jika perangkat mendukung hover (bukan layar sentuh)
             if (window.matchMedia("(pointer: fine)").matches) {
                 window.addEventListener("mousemove", function(e) {
                     const posX = e.clientX;
@@ -281,14 +306,10 @@
                     cursorDot.style.left = `${posX}px`;
                     cursorDot.style.top = `${posY}px`;
                     
-                    cursorOutline.animate({
-                        left: `${posX}px`,
-                        top: `${posY}px`
-                    }, { duration: 500, fill: "forwards" });
+                    cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
                 });
 
-                // Efek membesar saat hover link/tombol
-                const hoverElements = document.querySelectorAll("a, .btn, .repair-img");
+                const hoverElements = document.querySelectorAll("a, .btn, .repair-img, .close-modal");
                 hoverElements.forEach(el => {
                     el.addEventListener("mouseenter", () => {
                         cursorOutline.style.width = "60px";
@@ -309,9 +330,7 @@
                 for (var i = 0; i < reveals.length; i++) {
                     var windowHeight = window.innerHeight;
                     var elementTop = reveals[i].getBoundingClientRect().top;
-                    if (elementTop < windowHeight - 50) {
-                        reveals[i].classList.add("active");
-                    }
+                    if (elementTop < windowHeight - 50) { reveals[i].classList.add("active"); }
                 }
             }
             window.addEventListener("scroll", reveal);
@@ -319,37 +338,57 @@
 
             // 3. TYPING EFFECT
             const texts = ["IT Support Specialist", "Network Automation Developer", "Laravel Enthusiast"];
-            let count = 0;
-            let index = 0;
-            let currentText = "";
-            let isDeleting = false;
+            let count = 0; let index = 0; let currentText = ""; let isDeleting = false;
             const typingElement = document.querySelector(".typing-text");
 
             function type() {
                 if(!typingElement) return; 
-                
                 if (count === texts.length) { count = 0; }
                 currentText = texts[count];
 
-                if (isDeleting) {
-                    typingElement.textContent = currentText.slice(0, --index);
-                } else {
-                    typingElement.textContent = currentText.slice(0, ++index);
-                }
+                if (isDeleting) { typingElement.textContent = currentText.slice(0, --index); } 
+                else { typingElement.textContent = currentText.slice(0, ++index); }
 
                 let typeSpeed = isDeleting ? 50 : 100;
 
                 if (!isDeleting && typingElement.textContent.length === currentText.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
+                    typeSpeed = 2000; isDeleting = true;
                 } else if (isDeleting && typingElement.textContent.length === 0) {
-                    isDeleting = false;
-                    count++;
-                    typeSpeed = 500;
+                    isDeleting = false; count++; typeSpeed = 500;
                 }
                 setTimeout(type, typeSpeed);
             }
             setTimeout(type, 1500);
+
+            // 4. LIGHTBOX / MODAL GAMBAR (Baru)
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("expandedImg");
+            const closeBtn = document.querySelector(".close-modal");
+            const repairImages = document.querySelectorAll(".repair-img");
+
+            // Fungsi Buka Modal
+            repairImages.forEach(img => {
+                img.addEventListener("click", function() {
+                    modal.style.display = "flex";
+                    // Sedikit delay agar transisi CSS berjalan
+                    setTimeout(() => { modal.classList.add("show"); }, 10);
+                    modalImg.src = this.src; // Ambil sumber gambar yang diklik
+                });
+            });
+
+            // Fungsi Tutup Modal
+            function closeModal() {
+                modal.classList.remove("show");
+                setTimeout(() => { modal.style.display = "none"; }, 300);
+            }
+
+            // Tutup jika tombol X diklik
+            closeBtn.addEventListener("click", closeModal);
+            
+            // Tutup jika area luar gambar (background hitam) diklik
+            modal.addEventListener("click", function(e) {
+                if(e.target === modal) { closeModal(); }
+            });
         });
     </script>
 </body>
