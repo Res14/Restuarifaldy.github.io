@@ -16,21 +16,46 @@
             --bg: #f8fafc;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --glass: rgba(255, 255, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.85);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
+        
+        /* Hilangkan kursor bawaan untuk PC */
+        @media (pointer: fine) {
+            body, a, .btn, .repair-img { cursor: none !important; }
+        }
+
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; position: relative; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
         section { padding: 5rem 0; }
 
         .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 3rem; position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: linear-gradient(to right, var(--secondary), var(--accent)); margin: 10px auto 0; border-radius: 2px; }
+
+        /* --- Ambient Background Glow --- */
+        .ambient-glow { position: fixed; border-radius: 50%; filter: blur(120px); opacity: 0.4; z-index: 0; animation: floatBlob 15s infinite alternate; pointer-events: none; }
+        .glow-1 { width: 400px; height: 400px; background: var(--secondary); top: -100px; left: -100px; }
+        .glow-2 { width: 350px; height: 350px; background: var(--accent); bottom: -100px; right: -100px; animation-delay: -5s; }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 100px) scale(1.2); }
+        }
+
+        /* --- Kursor Custom --- */
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--secondary); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none; transition: width 0.2s, height 0.2s; }
+        
+        /* Sembunyikan kursor custom di HP */
+        @media (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none; }
+        }
 
         /* --- Animasi Aman (Pure CSS) --- */
         @keyframes fadeInUp {
@@ -51,22 +76,8 @@
         nav { background-color: var(--glass); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; height: 70px; }
         
-        /* CSS Khusus Logo Bergerak (Opsi 3) */
-        .logo-iconic {
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-        .logo-iconic i {
-            color: var(--secondary);
-            margin-right: 10px;
-            font-size: 1.5rem;
-            transition: all 0.5s ease;
-        }
+        .logo-iconic { font-size: 1.6rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; transition: transform 0.3s ease; }
+        .logo-iconic i { color: var(--secondary); margin-right: 10px; font-size: 1.5rem; transition: all 0.5s ease; }
         .logo-iconic .dot, .logo-iconic .it { color: var(--secondary); }
         .logo-iconic:hover i { transform: rotate(360deg); color: var(--primary); }
         .logo-iconic:hover { transform: scale(1.05); }
@@ -76,8 +87,7 @@
         .nav-links a:hover { color: var(--secondary); }
 
         /* --- Hero Section --- */
-        .hero { background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%); color: white; min-height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 70px; position: relative; }
-        .hero::before { content: ''; position: absolute; width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); filter: blur(100px); border-radius: 50%; top: 20%; left: 50%; transform: translateX(-50%); z-index: 0; }
+        .hero { background: transparent; color: var(--text-main); min-height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 70px; position: relative; }
         
         .hero-content { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
@@ -86,67 +96,75 @@
         .hero-animate-3 { animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0; }
         .hero-animate-4 { animation: fadeInUp 0.8s ease-out 0.9s forwards; opacity: 0; }
 
-        .profile-pic { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary); margin-bottom: 2rem; animation: float 4s ease-in-out infinite; }
-        .hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
-        .hero h1 span { color: var(--accent); }
+        .profile-pic { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary); margin-bottom: 2rem; animation: float 4s ease-in-out infinite; background-color: white;}
+        .hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary); }
+        .hero h1 span { background: linear-gradient(to right, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .typewriter-container { font-size: 1.25rem; color: var(--accent); margin-bottom: 1rem; height: 30px; font-weight: 600; }
-        .typing-text::after { content: '|'; animation: blink 0.7s infinite; color: white; }
-        .hero p { font-size: 1rem; color: #94a3b8; margin-bottom: 2.5rem; max-width: 600px; }
+        .typewriter-container { font-size: 1.25rem; color: var(--secondary); margin-bottom: 1rem; height: 30px; font-weight: 600; }
+        .typing-text::after { content: '|'; animation: blink 0.7s infinite; color: var(--primary); }
+        .hero p { font-size: 1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; }
         
-        .btn { display: inline-block; padding: 0.8rem 2.5rem; background: linear-gradient(to right, var(--secondary), var(--accent)); color: white; font-weight: 600; border-radius: 50px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
-        .btn:hover { transform: translateY(-3px) scale(1.05); }
+        .btn { display: inline-block; padding: 0.8rem 2.5rem; background: linear-gradient(to right, var(--secondary), var(--accent)); color: white; font-weight: 600; border-radius: 50px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); border: none; }
+        .btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
 
         /* --- Konten Bawah --- */
-        .about-card { background: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); }
+        .about-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.5); }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .skill-item { background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; transition: var(--transition); border: 1px solid transparent; }
-        .skill-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: rgba(59, 130, 246, 0.3); }
-        .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+        
+        /* Modifikasi untuk efek Tilt */
+        .skill-item { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; border: 1px solid rgba(255,255,255,0.6); transform-style: preserve-3d; }
+        .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; transform: translateZ(30px); }
+        .skill-text { transform: translateZ(20px); }
         .skill-text h3 { font-size: 1.1rem; color: var(--primary); }
         .skill-text p { font-size: 0.9rem; color: var(--text-muted); }
 
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .project-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: var(--transition); }
-        .project-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+        .project-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.6); transform-style: preserve-3d; }
         .project-header { height: 8px; background: linear-gradient(to right, var(--secondary), var(--accent)); }
-        .project-body { padding: 2rem; }
+        .project-body { padding: 2rem; transform: translateZ(30px); }
         .project-body i { font-size: 1.5rem; color: var(--secondary); margin-bottom: 1rem; }
         .project-body h3 { font-size: 1.3rem; color: var(--primary); margin-bottom: 0.5rem; }
         .project-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
         
         .repair-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
         .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; transition: var(--transition); border: 1px solid #eee; }
-        .repair-img:hover { transform: scale(1.1); cursor: pointer; z-index: 10; position: relative;}
+        .repair-img:hover { transform: scale(1.1); z-index: 10; position: relative;}
 
-        .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; text-align: center; box-shadow: var(--shadow-lg); }
+        .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; text-align: center; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+        .contact-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 50%); z-index: 0; }
+        .contact-card > * { position: relative; z-index: 1; }
         .contact-card h2 { color: white; margin-top: 0; margin-bottom: 1rem; }
         .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
-        .contact-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.5rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .contact-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.5rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-weight: 500; }
         .contact-btn:hover { background-color: rgba(255,255,255,0.1); border-color: var(--accent); transform: translateY(-3px); }
         .contact-btn i { color: var(--accent); }
 
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; position: relative; z-index: 10;}
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
             .logo-iconic { font-size: 1.3rem; }
+            .ambient-glow { display: none; } /* Matikan glow di HP agar tidak berat */
         }
     </style>
 </head>
 <body>
 
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
     <nav>
         <div class="container nav-content">
-            
             <a href="#" class="logo-iconic">
                 <i class="fas fa-server"></i>
                 <span class="restu">Restu</span>
                 <span class="dot">.</span>
                 <span class="it">IT</span>
             </a>
-
             <ul class="nav-links">
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#skills">Keahlian</a></li>
@@ -182,19 +200,19 @@
         <section id="skills" class="reveal">
             <h2 class="section-title">Keahlian Teknis</h2>
             <div class="skills-grid">
-                <div class="skill-item"><div class="skill-icon"><i class="fas fa-cash-register"></i></div><div class="skill-text"><h3>POS & Hardware</h3><p>Troubleshooting PC Kasir & Periferal.</p></div></div>
-                <div class="skill-item"><div class="skill-icon"><i class="fas fa-database"></i></div><div class="skill-text"><h3>MySQL Database</h3><p>Query & Perbaikan Error Database.</p></div></div>
-                <div class="skill-item"><div class="skill-icon"><i class="fas fa-video"></i></div><div class="skill-text"><h3>CCTV System</h3><p>Konfigurasi DVR/NVR & Maintenance.</p></div></div>
-                <div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-text"><h3>Python Scripting</h3><p>Otomasi monitoring jaringan ritel.</p></div></div>
-                <div class="skill-item"><div class="skill-icon"><i class="fab fa-laravel"></i></div><div class="skill-text"><h3>PHP Laravel</h3><p>Dashboard Monitoring & Tools Internal.</p></div></div>
-                <div class="skill-item"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-text"><h3>Networking</h3><p>Maintenance LAN, WLAN Toko.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-cash-register"></i></div><div class="skill-text"><h3>POS & Hardware</h3><p>Troubleshooting PC Kasir & Periferal.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-database"></i></div><div class="skill-text"><h3>MySQL Database</h3><p>Query & Perbaikan Error Database.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-video"></i></div><div class="skill-text"><h3>CCTV System</h3><p>Konfigurasi DVR/NVR & Maintenance.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-text"><h3>Python Scripting</h3><p>Otomasi monitoring jaringan ritel.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-laravel"></i></div><div class="skill-text"><h3>PHP Laravel</h3><p>Dashboard Monitoring & Tools Internal.</p></div></div>
+                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-text"><h3>Networking</h3><p>Maintenance LAN, WLAN Toko.</p></div></div>
             </div>
         </section>
 
         <section id="projects" class="reveal">
             <h2 class="section-title">Proyek & Pencapaian</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-network-wired"></i>
@@ -202,7 +220,7 @@
                         <p>Mendevelop script Python yang memantau konektivitas ratusan cabang secara real-time dan mengirim notifikasi downtime instan.</p>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-chart-line"></i>
@@ -210,7 +228,7 @@
                         <p>Membangun aplikasi web central berbasis Laravel untuk memvisualisasikan status kesehatan IT seluruh toko.</p>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-tools"></i>
@@ -218,6 +236,7 @@
                         <div class="repair-gallery">
                             <img src="repair1.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
                             <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
+                            <img src="repair3.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
                         <p>Contoh perbaikan hardware ritel: Pembersihan PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
                     </div>
@@ -230,9 +249,9 @@
                 <h2 class="section-title" style="color:white;">Mari Berkolaborasi</h2>
                 <p>Tertarik untuk membahas peluang kerja atau proyek otomatisasi IT ritel? Hubungi saya.</p>
                 <div class="contact-links">
-                    <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
-                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="mailto:alldi.restu@gmail.com" class="contact-btn" data-cursor-hover><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn" data-cursor-hover><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/restuarifaldy" target="_blank" class="contact-btn" data-cursor-hover><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </section>
@@ -240,13 +259,51 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy Code.</p>
+            <p>&copy; 2026 Restu Arifaldy.Code.</p>
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // SCROLL REVEAL 
+            
+            // 1. CUSTOM CURSOR
+            const cursorDot = document.querySelector("[data-cursor-dot]");
+            const cursorOutline = document.querySelector("[data-cursor-outline]");
+            
+            // Cek jika perangkat mendukung hover (bukan layar sentuh)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                window.addEventListener("mousemove", function(e) {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+                    
+                    cursorOutline.animate({
+                        left: `${posX}px`,
+                        top: `${posY}px`
+                    }, { duration: 500, fill: "forwards" });
+                });
+
+                // Efek membesar saat hover link/tombol
+                const hoverElements = document.querySelectorAll("a, .btn, .repair-img");
+                hoverElements.forEach(el => {
+                    el.addEventListener("mouseenter", () => {
+                        cursorOutline.style.width = "60px";
+                        cursorOutline.style.height = "60px";
+                        cursorOutline.style.backgroundColor = "rgba(34, 211, 238, 0.1)";
+                    });
+                    el.addEventListener("mouseleave", () => {
+                        cursorOutline.style.width = "40px";
+                        cursorOutline.style.height = "40px";
+                        cursorOutline.style.backgroundColor = "transparent";
+                    });
+                });
+            }
+
+            // 2. SCROLL REVEAL 
             function reveal() {
                 var reveals = document.querySelectorAll(".reveal");
                 for (var i = 0; i < reveals.length; i++) {
@@ -260,7 +317,7 @@
             window.addEventListener("scroll", reveal);
             reveal(); 
 
-            // TYPING EFFECT
+            // 3. TYPING EFFECT
             const texts = ["IT Support Specialist", "Network Automation Developer", "Laravel Enthusiast"];
             let count = 0;
             let index = 0;
