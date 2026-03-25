@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Restu Arifaldy | IT Support Specialist</title>
-    <meta name="description" content="Portfolio Profesional IT Support & Web Developer. Berpengalaman di industri ritel, otomasi Python, dan web Laravel.">
-    <meta property="og:title" content="Restu Arifaldy | IT Support & Developer">
+    <meta name="description" content="Portfolio Profesional IT Support. Berpengalaman di industri ritel, otomasi Python, dan web Laravel.">
+    <meta property="og:title" content="Restu Arifaldy | IT Support">
     <meta property="og:description" content="Lihat portofolio, keahlian, dan proyek IT terbaru saya.">
     <meta property="og:image" content="https://raw.githubusercontent.com/restuarifaldy/restuarifaldy.github.io/main/profile.jpg">
     <meta property="og:url" content="https://restuarifaldy.github.io">
@@ -75,7 +75,7 @@
         .welcome-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            color: white; z-index: 10005; /* Paling atas */
+            color: white; z-index: 10005; 
             display: flex; justify-content: center; align-items: center; text-align: center;
             transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
         }
@@ -103,7 +103,6 @@
         .hero { background: transparent; color: var(--text-main); min-height: 100vh; display: flex; align-items: center; text-align: center; padding-top: 70px; position: relative; z-index: 5;}
         .hero-content { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
-        /* Hilangkan opacity: 0 bawaan di CSS karena reveal akan dikontrol oleh JS setelah Welcome Intro selesai */
         .hero-animate { opacity: 0; } 
         .hero-revealed .hero-animate-1 { animation: fadeInUp 0.8s ease-out forwards; }
         .hero-revealed .hero-animate-2 { animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0; }
@@ -146,7 +145,7 @@
         .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; transition: var(--transition); border: 1px solid #eee; }
         .repair-img:hover { transform: scale(1.05); z-index: 10; position: relative; box-shadow: var(--shadow-md); border-color: var(--secondary);}
 
-        /* --- CONTACT SECTION BARU (DENGAN FORM) --- */
+        /* --- CONTACT SECTION BARU (DENGAN FORMSPREE) --- */
         .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; text-align: center; z-index: 10;}
         .contact-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 50%); z-index: 0; }
         .contact-card > * { position: relative; z-index: 1; }
@@ -187,14 +186,15 @@
         }
     </style>
 </head>
-<body class="loading"> <div id="welcomeOverlay" class="welcome-overlay">
+<body class="loading"> 
+
+    <div id="welcomeOverlay" class="welcome-overlay">
         <div class="welcome-content">
             <h1 class="welcome-title">
                 <i class="fas fa-server"></i>
                 <span class="restu">Restu</span>
                 <span class="dot">.</span>
                 <span class="it">IT</span>
-            
             </h1>
             <p style="color: #94a3b8; font-weight: 400;">Loading Solutions...</p>
         </div>
@@ -241,12 +241,13 @@
             
             <div class="hero-buttons hero-animate-4">
                 <a href="#contact" class="btn">Mari Berkolaborasi</a>
-                <a href="CV- RESTU ARIFALDY.pdf" download class="btn btn-outline"><i class="fas fa-file-pdf"></i> Download CV</a>
+                <a href="CV- RESTU ARIFALDY.pdf" download="CV_Restu_Arifaldy.pdf" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Download CV</a>
             </div>
         </div>
     </header>
 
-    <div class="container main-content-reveal"> <section id="about" class="reveal">
+    <div class="container main-content-reveal">
+        <section id="about" class="reveal">
             <div class="about-card">
                 <h2 class="section-title">Tentang Saya</h2>
                 <p>Saya adalah profesional IT yang berfokus pada keandalan infrastruktur ritel. Tidak hanya menangani masalah harian pada aplikasi POS, Komputer, dan CCTV, saya memiliki <i>passion</i> dalam efisiensi.</p>
@@ -293,7 +294,6 @@
                         <div class="repair-gallery">
                             <img src="repair1.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
                             <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
-                            <img src="repair3.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
                         <p>Contoh perbaikan hardware ritel: Pembersihan PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
                     </div>
@@ -310,13 +310,14 @@
                     <div class="contact-links-vertical">
                         <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> alldi.restu@gmail.com</a>
                         <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn / restuarifaldy</a>
-                        <a href="https://github.com/Res14y" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub / restuarifaldy</a>
+                        <a href="https://instagram.com/restuarif" target="_blank" class="contact-btn"><i class="fab fa-instagram"></i> Instagram / restuarifaldy</a>
+                        <a href="https://github.com/Res14" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub / restuarifaldy</a>
                     </div>
                     
-                    <form action="https://formspree.io/f/xbjvzyqw" method="POST" class="contact-form">
-                        <input type="text" name="name" placeholder="Nama Lengkap Anda" required>
-                        <input type="email" name="email" placeholder="Alamat Email Anda" required>
-                        <textarea name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                    <form action="https://formspree.io/f/mjgpbeqe" method="POST" class="contact-form">
+                        <input type="text" name="Nama_Lengkap" placeholder="Nama Lengkap Anda" required>
+                        <input type="email" name="Email_Pengirim" placeholder="Alamat Email Anda" required>
+                        <textarea name="Pesan" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
                         <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
                     </form>
                 </div>
@@ -326,7 +327,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy</p>
+            <p>&copy; 2026 Restu Arifaldy.</p>
         </div>
     </footer>
 
@@ -335,25 +336,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 0. WELCOME INTRO LOGIC (BARU)
+            // 0. WELCOME INTRO LOGIC
             const welcomeOverlay = document.getElementById("welcomeOverlay");
             const heroSection = document.getElementById("heroSection");
             const body = document.body;
 
-            // Trigger Welcome Overlay meluncur ke atas setelah delay
             setTimeout(() => {
                 welcomeOverlay.classList.add("hide");
                 
-                // Setelah Welcome meluncur (menunggu animasi selesai), tampilkan konten utama hero
                 setTimeout(() => {
                     heroSection.classList.add("hero-revealed");
                     body.classList.remove("loading");
-                    
-                    // Aktifkan scroll reveal untuk section bawah
                     reveal();
-                }, 1000); // Harus sama atau lebih sedikit dari durasi transisi 'transform' welcome-overlay (1.2s)
+                }, 1000); 
                 
-            }, 1800); // Durasi Logo Welcome berdenyut di layar (1.8s)
+            }, 1800); 
 
             // 1. CUSTOM CURSOR
             const cursorDot = document.querySelector("[data-cursor-dot]");
@@ -381,7 +378,6 @@
 
             // 2. SCROLL REVEAL 
             function reveal() {
-                // Jangan panggil reveal jika intro welcome belum selesai
                 if(welcomeOverlay.classList.contains("hide")) {
                     var reveals = document.querySelectorAll(".reveal");
                     for (var i = 0; i < reveals.length; i++) {
@@ -400,7 +396,6 @@
 
             function type() {
                 if(!typingElement) return; 
-                // Mulai typing hanya jika intro welcome sudah selesai
                 if(!welcomeOverlay.classList.contains("hide")) {
                     setTimeout(type, 100); 
                     return;
@@ -420,7 +415,6 @@
                 }
                 setTimeout(type, typeSpeed);
             }
-            // Delay ngetik agar singkron setelah welcome meluncur
             setTimeout(type, 3000); 
 
             // 4. LIGHTBOX / MODAL GAMBAR
