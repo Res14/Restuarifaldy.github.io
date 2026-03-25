@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Restu Arifaldy | IT Support Specialist</title>
-    <meta name="description" content="Portfolio Profesional IT Support. Berpengalaman di industri ritel, otomasi Python, dan web Laravel.">
-    <meta property="og:title" content="Restu Arifaldy | IT Support">
+    <meta name="description" content="Portfolio Profesional IT Support & Web Developer. Berpengalaman di industri ritel, otomasi Python, dan web Laravel.">
+    <meta property="og:title" content="Restu Arifaldy | IT Support & Developer">
     <meta property="og:description" content="Lihat portofolio, keahlian, dan proyek IT terbaru saya.">
     <meta property="og:image" content="https://raw.githubusercontent.com/restuarifaldy/restuarifaldy.github.io/main/profile.jpg">
     <meta property="og:url" content="https://restuarifaldy.github.io">
@@ -34,7 +34,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         @media (pointer: fine) {
-            body, a, .btn, .repair-img, button { cursor: none !important; }
+            body, a, .btn, .repair-img, .profile-pic, .skill-item, .project-card, button { cursor: none !important; }
         }
 
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; position: relative; }
@@ -58,7 +58,7 @@
 
         /* --- Kursor Custom --- */
         .cursor-dot { width: 8px; height: 8px; background-color: var(--secondary); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10002; pointer-events: none; }
-        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10001; pointer-events: none; transition: width 0.2s, height 0.2s; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10001; pointer-events: none; transition: top 0.08s ease-out, left 0.08s ease-out, width 0.2s ease, height 0.2s ease, background-color 0.2s ease; }
         
         @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } }
 
@@ -67,6 +67,13 @@
         @keyframes float { 0%, 100% { transform: translateY(0px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); } 50% { transform: translateY(-15px); box-shadow: 0 25px 15px rgba(0,0,0,0.1); } }
         @keyframes blink { 50% { opacity: 0; } }
         @keyframes pulseLogo { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px var(--secondary)); } 50% { opacity: 0.7; filter: drop-shadow(0 0 15px var(--accent)); } }
+
+        /* --- Efek Klik Kartu (Glow Pulse) --- */
+        @keyframes clickGlow {
+            0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.8); border-color: var(--accent); transform: scale(0.98); }
+            100% { box-shadow: 0 0 20px 20px rgba(34, 211, 238, 0); border-color: rgba(255,255,255,0.6); transform: scale(1); }
+        }
+        .clicked-card { animation: clickGlow 0.5s ease-out; }
 
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -109,7 +116,19 @@
         .hero-revealed .hero-animate-3 { animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0; }
         .hero-revealed .hero-animate-4 { animation: fadeInUp 0.8s ease-out 0.9s forwards; opacity: 0; }
 
-        .profile-pic { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--secondary); margin-bottom: 2rem; animation: float 4s ease-in-out infinite; background-color: white;}
+        /* Perbaikan Foto Profil Bisa Di Klik */
+        .profile-pic { 
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover; 
+            border: 4px solid var(--secondary); margin-bottom: 2rem; 
+            animation: float 4s ease-in-out infinite; background-color: white;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .profile-pic:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.5);
+            animation-play-state: paused; /* Berhenti melayang sebentar saat disorot */
+        }
+
         .hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--primary); }
         .hero h1 span { background: linear-gradient(to right, var(--secondary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
@@ -127,6 +146,7 @@
         /* --- Konten Bawah --- */
         .about-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid rgba(255,255,255,0.5); }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        
         .skill-item { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; border: 1px solid rgba(255,255,255,0.6); transform-style: preserve-3d; }
         .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; transform: translateZ(30px); }
         .skill-text { transform: translateZ(20px); }
@@ -145,7 +165,7 @@
         .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; transition: var(--transition); border: 1px solid #eee; }
         .repair-img:hover { transform: scale(1.05); z-index: 10; position: relative; box-shadow: var(--shadow-md); border-color: var(--secondary);}
 
-        /* --- CONTACT SECTION BARU (DENGAN FORMSPREE) --- */
+        /* --- CONTACT SECTION --- */
         .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-lg); position: relative; overflow: hidden; text-align: center; z-index: 10;}
         .contact-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 50%); z-index: 0; }
         .contact-card > * { position: relative; z-index: 1; }
@@ -153,9 +173,10 @@
         
         .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; margin-top: 3rem; text-align: left; }
         .contact-links-vertical { display: flex; flex-direction: column; gap: 1rem; justify-content: center;}
-        .contact-btn { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 1rem;}
-        .contact-btn:hover { background-color: rgba(255,255,255,0.1); border-color: var(--accent); transform: translateX(5px); }
-        .contact-btn i { color: var(--accent); font-size: 1.5rem;}
+        
+        .contact-btn { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 1.1rem; color: white;}
+        .contact-btn:hover { background-color: rgba(255,255,255,0.1); border-color: var(--accent); transform: translateX(5px); color: white;}
+        .contact-btn i { color: var(--accent); font-size: 1.5rem; width: 30px; text-align: center;}
         
         .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 1.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white; font-family: 'Poppins', sans-serif; outline: none; transition: var(--transition); }
@@ -165,10 +186,10 @@
 
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; position: relative; z-index: 10;}
 
-        /* --- LIGHTBOX --- */
+        /* --- LIGHTBOX (MODAL GAMBAR) --- */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.9); backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; }
         .modal.show { display: flex; justify-content: center; align-items: center; opacity: 1; }
-        .modal-content { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid var(--secondary); transform: scale(0.8); transition: transform 0.3s ease; }
+        .modal-content { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 2px solid var(--secondary); transform: scale(0.8); transition: transform 0.3s ease; object-fit: contain;}
         .modal.show .modal-content { transform: scale(1); }
         .close-modal { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; transition: 0.3s; }
         .close-modal:hover, .close-modal:focus { color: var(--accent); text-decoration: none; transform: scale(1.1); }
@@ -230,7 +251,7 @@
 
     <header id="heroSection" class="hero hero-section">
         <div class="container hero-content">
-            <img src="profile.jpg" alt="Restu Arifaldy" class="profile-pic hero-animate-1" onerror="this.src='https://placehold.co/160x160/3b82f6/white?text=RA'">
+            <img src="profile.jpg" alt="Restu Arifaldy" class="profile-pic hero-animate-1 clickable-img" onerror="this.src='https://placehold.co/160x160/3b82f6/white?text=RA'">
             <h1 class="hero-animate-2">Hi, Saya <span>Restu</span></h1>
             
             <div class="typewriter-container hero-animate-3">
@@ -258,19 +279,19 @@
         <section id="skills" class="reveal">
             <h2 class="section-title">Keahlian Teknis</h2>
             <div class="skills-grid">
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-cash-register"></i></div><div class="skill-text"><h3>POS & Hardware</h3><p>Troubleshooting PC Kasir & Periferal.</p></div></div>
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-database"></i></div><div class="skill-text"><h3>MySQL Database</h3><p>Query & Perbaikan Error Database.</p></div></div>
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-video"></i></div><div class="skill-text"><h3>CCTV System</h3><p>Konfigurasi DVR/NVR & Maintenance.</p></div></div>
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-text"><h3>Python Scripting</h3><p>Otomasi monitoring jaringan ritel.</p></div></div>
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-laravel"></i></div><div class="skill-text"><h3>PHP Laravel</h3><p>Dashboard Monitoring & Tools Internal.</p></div></div>
-                <div class="skill-item" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-text"><h3>Networking</h3><p>Maintenance LAN, WLAN Toko.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-cash-register"></i></div><div class="skill-text"><h3>POS & Hardware</h3><p>Troubleshooting PC Kasir & Periferal.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-database"></i></div><div class="skill-text"><h3>MySQL Database</h3><p>Query & Perbaikan Error Database.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-video"></i></div><div class="skill-text"><h3>CCTV System</h3><p>Konfigurasi DVR/NVR & Maintenance.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-text"><h3>Python Scripting</h3><p>Otomasi monitoring jaringan ritel.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fab fa-laravel"></i></div><div class="skill-text"><h3>PHP Laravel</h3><p>Dashboard Monitoring & Tools Internal.</p></div></div>
+                <div class="skill-item interactive-card" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-text"><h3>Networking</h3><p>Maintenance LAN, WLAN Toko.</p></div></div>
             </div>
         </section>
 
         <section id="projects" class="reveal">
             <h2 class="section-title">Proyek & Pencapaian</h2>
             <div class="projects-grid">
-                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div class="project-card interactive-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-network-wired"></i>
@@ -278,7 +299,7 @@
                         <p>Mendevelop script Python yang memantau konektivitas ratusan cabang secara real-time dan mengirim notifikasi downtime instan.</p>
                     </div>
                 </div>
-                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div class="project-card interactive-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-chart-line"></i>
@@ -286,14 +307,15 @@
                         <p>Membangun aplikasi web central berbasis Laravel untuk memvisualisasikan status kesehatan IT seluruh toko.</p>
                     </div>
                 </div>
-                <div class="project-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
+                <div class="project-card interactive-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.3">
                     <div class="project-header"></div>
                     <div class="project-body">
                         <i class="fas fa-tools"></i>
                         <h3>Maintenance Hardware</h3>
                         <div class="repair-gallery">
-                            <img src="repair1.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
-                            <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
+                            <img src="repair1.jpg" alt="Perbaikan" class="repair-img clickable-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
+                            <img src="repair2.jpg" alt="Perbaikan" class="repair-img clickable-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
+                            <img src="repair3.jpg" alt="Perbaikan" class="repair-img clickable-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
                         <p>Contoh perbaikan hardware ritel: Pembersihan PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
                     </div>
@@ -308,10 +330,10 @@
                 
                 <div class="contact-container">
                     <div class="contact-links-vertical">
-                        <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> alldi.restu@gmail.com</a>
-                        <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn / restuarifaldy</a>
-                        <a href="https://instagram.com/restuarif" target="_blank" class="contact-btn"><i class="fab fa-instagram"></i> Instagram / restuarifaldy</a>
-                        <a href="https://github.com/Res14" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub / restuarifaldy</a>
+                        <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
+                        <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://instagram.com/restuarif" target="_blank" class="contact-btn"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://github.com/Res14" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                     
                     <form action="https://formspree.io/f/mjgpbeqe" method="POST" class="contact-form">
@@ -327,7 +349,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy.</p>
+            <p>&copy; 2026 Restu Arifaldy</p>
         </div>
     </footer>
 
@@ -343,16 +365,14 @@
 
             setTimeout(() => {
                 welcomeOverlay.classList.add("hide");
-                
                 setTimeout(() => {
                     heroSection.classList.add("hero-revealed");
                     body.classList.remove("loading");
                     reveal();
                 }, 1000); 
-                
             }, 1800); 
 
-            // 1. CUSTOM CURSOR
+            // 1. KURSOR CUSTOM
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             
@@ -360,10 +380,11 @@
                 window.addEventListener("mousemove", function(e) {
                     const posX = e.clientX; const posY = e.clientY;
                     cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-                    cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+                    cursorOutline.style.left = `${posX}px`; cursorOutline.style.top = `${posY}px`;
                 });
 
-                const hoverElements = document.querySelectorAll("a, .btn, .repair-img, .close-modal, button, input, textarea");
+                // Tambahan: Elemen baru (Profile Pic & Kartu) di-hover akan mengubah kursor jadi besar
+                const hoverElements = document.querySelectorAll("a, .btn, .clickable-img, .interactive-card, .close-modal, button, input, textarea");
                 hoverElements.forEach(el => {
                     el.addEventListener("mouseenter", () => {
                         cursorOutline.style.width = "60px"; cursorOutline.style.height = "60px";
@@ -417,14 +438,15 @@
             }
             setTimeout(type, 3000); 
 
-            // 4. LIGHTBOX / MODAL GAMBAR
+            // 4. LIGHTBOX / MODAL GAMBAR (FOTO PROFIL & PERBAIKAN)
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("expandedImg");
             const closeBtn = document.querySelector(".close-modal");
-            const repairImages = document.querySelectorAll(".repair-img");
+            const clickableImages = document.querySelectorAll(".clickable-img"); // Memanggil foto profil & perbaikan
 
-            repairImages.forEach(img => {
-                img.addEventListener("click", function() {
+            clickableImages.forEach(img => {
+                img.addEventListener("click", function(e) {
+                    e.stopPropagation(); // Mencegah klik menyebar ke kartu pembungkusnya
                     modal.style.display = "flex";
                     setTimeout(() => { modal.classList.add("show"); }, 10);
                     modalImg.src = this.src; 
@@ -437,6 +459,21 @@
             }
             closeBtn.addEventListener("click", closeModal);
             modal.addEventListener("click", function(e) { if(e.target === modal) { closeModal(); } });
+
+            // 5. ANIMASI KLIK PADA KARTU (Keahlian & Proyek)
+            const interactiveCards = document.querySelectorAll(".interactive-card");
+            interactiveCards.forEach(card => {
+                card.addEventListener("click", function(e) {
+                    // Hindari efek klik kartu jika yang diklik adalah foto di dalam galeri perbaikan
+                    if(e.target.classList.contains('clickable-img')) return;
+                    
+                    // Reset animasi agar bisa diulang-ulang
+                    this.classList.remove("clicked-card");
+                    void this.offsetWidth; // Memicu reflow (mengerjakan ulang animasi css)
+                    this.classList.add("clicked-card");
+                });
+            });
+
         });
     </script>
 </body>
