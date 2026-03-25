@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>Restu Arifaldy | IT Support Specialist</title>
-    <meta name="description" content="Portfolio Profesional IT Support">
+    <meta name="description" content="Portfolio Profesional IT Support Specialist. Berpengalaman di industri ritel, otomasi IT, dan infrastruktur jaringan.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
         
         @media (pointer: fine) { body, a, .btn, .repair-img, .profile-pic, .skill-item, .project-card, button { cursor: none !important; } }
 
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text-main); line-height: 1.8; overflow-x: hidden; width: 100%;}
         h1, h2, h3, .logo-iconic { font-family: 'Outfit', sans-serif; } 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
@@ -46,27 +46,18 @@
         .glow-1 { width: 500px; height: 500px; background: #3b82f6; top: -150px; left: -150px; }
         .glow-2 { width: 450px; height: 450px; background: #22d3ee; bottom: -10%; right: -10%; animation-delay: -5s; }
 
-        @keyframes floatBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(150px, 150px) scale(1.3); }
-        }
+        @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(150px, 150px) scale(1.3); } }
 
         /* --- Kursor Custom --- */
         .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10002; pointer-events: none; box-shadow: 0 0 10px var(--accent);}
         .cursor-outline { width: 45px; height: 45px; border: 1px solid rgba(34, 211, 238, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 10001; pointer-events: none; transition: top 0.08s ease-out, left 0.08s ease-out, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s; backdrop-filter: blur(2px);}
-        @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none; } }
+        @media (pointer: coarse) { .cursor-dot, .cursor-outline { display: none !important; } }
 
         /* --- Animasi --- */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseLogo { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px var(--secondary)); } 50% { opacity: 0.7; filter: drop-shadow(0 0 20px var(--accent)); } }
         @keyframes clickGlow { 0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.6); border-color: var(--accent); transform: scale(0.98); } 100% { box-shadow: 0 0 30px 30px rgba(34, 211, 238, 0); border-color: var(--glass-border); transform: scale(1); } }
-        
-        /* Morphing Profile Picture Animation */
-        @keyframes morphing {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
+        @keyframes morphing { 0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } }
 
         .clicked-card { animation: clickGlow 0.6s ease-out; }
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
@@ -75,14 +66,14 @@
         /* --- Welcome Overlay --- */
         .welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; color: white; z-index: 10005; display: flex; justify-content: center; align-items: center; text-align: center; transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
         .welcome-overlay.hide { transform: translateY(-100%); }
-        .welcome-title { font-size: 3rem; font-weight: 700; color: white; display: flex; align-items: center;}
+        .welcome-title { font-size: 3rem; font-weight: 700; color: white; display: flex; align-items: center; justify-content: center;}
         .welcome-title i { color: var(--accent); animation: pulseLogo 2s infinite; margin-right: 20px;}
         .welcome-title span { color: var(--secondary); }
 
         /* --- Navigasi Modern --- */
-        nav { background: rgba(11, 17, 32, 0.7); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); position: fixed; width: 100%; top: 0; z-index: 1000; transition: var(--transition); }
+        nav { background: rgba(11, 17, 32, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); position: fixed; width: 100%; top: 0; z-index: 1000; transition: var(--transition); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo-iconic { font-size: 1.8rem; font-weight: 700; color: white; display: flex; align-items: center; letter-spacing: 1px; }
+        .logo-iconic { font-size: 1.8rem; font-weight: 700; color: white; display: flex; align-items: center; letter-spacing: 1px; z-index: 1002;}
         .logo-iconic i { color: var(--accent); margin-right: 12px; transition: transform 0.6s ease; }
         .logo-iconic span.dot, .logo-iconic span.it { color: var(--accent); }
         .logo-iconic:hover i { transform: rotate(180deg); }
@@ -90,10 +81,14 @@
         .nav-links { display: flex; gap: 2.5rem; }
         .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); position: relative; padding: 5px 0; }
         .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
-        .nav-links a:hover { color: white; }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: white; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-        /* --- Hero Section (SPLIT LAYOUT) --- */
+        /* Hamburger Menu Icon */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; z-index: 1002; gap: 6px;}
+        .menu-toggle .bar { width: 30px; height: 3px; background-color: white; border-radius: 3px; transition: 0.4s; }
+
+        /* --- Hero Section --- */
         .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
         .hero-content { display: flex; align-items: center; justify-content: space-between; gap: 4rem; width: 100%; }
         .hero-text { flex: 1; text-align: left; }
@@ -114,14 +109,14 @@
         .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 550px; line-height: 1.8;}
         
         .hero-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; font-weight: 600; border-radius: 50px; border: none; font-size: 1rem; transition: var(--transition); position: relative; overflow: hidden; z-index: 1;}
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; font-weight: 600; border-radius: 50px; border: none; font-size: 1rem; transition: var(--transition); position: relative; overflow: hidden; z-index: 1; cursor: pointer;}
         .btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--accent), var(--secondary)); z-index: -1; transition: opacity 0.4s ease; opacity: 0;}
         .btn:hover::before { opacity: 1; }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(34, 211, 238, 0.4); }
         
         .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: white; box-shadow: none; backdrop-filter: blur(10px); }
         .btn-outline::before { display: none; }
-        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); color: var(--accent); transform: translateY(-5px);}
+        .btn-outline:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); color: var(--accent); transform: translateY(-3px);}
 
         /* FOTO MORPHING BLOB */
         .profile-pic-container { position: relative; padding: 20px; }
@@ -131,12 +126,10 @@
 
         /* --- Glassmorphism Cards --- */
         .glass-card { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem; transition: var(--transition); }
-        
-        /* Tentang Saya */
         .about-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.9;}
         .about-text p strong { color: white; font-weight: 600; }
 
-        /* Keahlian (Asymmetric Grid) */
+        /* Keahlian Grid */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .skill-item { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--glass-border); display: flex; flex-direction: column; gap: 1.5rem; transform-style: preserve-3d; transition: var(--transition); }
         .skill-item:hover { border-color: rgba(34, 211, 238, 0.4); background: rgba(30, 41, 59, 0.8); transform: translateY(-10px); }
@@ -145,8 +138,8 @@
         .skill-text h3 { font-size: 1.3rem; color: white; margin-bottom: 0.5rem;}
         .skill-text p { font-size: 0.95rem; color: var(--text-muted); }
 
-        /* Proyek */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        /* Proyek Grid */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .project-card { background: rgba(30, 41, 59, 0.4); border-radius: 24px; border: 1px solid var(--glass-border); display: flex; flex-direction: column; overflow: hidden; transform-style: preserve-3d; transition: var(--transition); }
         .project-card:hover { border-color: var(--secondary); background: rgba(30, 41, 59, 0.7); }
         .project-body { padding: 2.5rem; transform: translateZ(30px); flex: 1;}
@@ -161,7 +154,6 @@
         /* --- CONTACT --- */
         .contact-card { background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); padding: 4rem; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
         .contact-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 60%); z-index: 0; }
-        
         .contact-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; position: relative; z-index: 1; align-items: center;}
         
         .contact-header h2 { font-size: 3rem; color: white; margin-bottom: 1rem; line-height: 1.2;}
@@ -176,37 +168,72 @@
         .contact-form input, .contact-form textarea { width: 100%; padding: 1.2rem 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: white; font-family: 'Poppins', sans-serif; font-size: 1rem; outline: none; transition: var(--transition); }
         .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); background: rgba(255,255,255,0.08); box-shadow: 0 0 15px rgba(34,211,238,0.1);}
-        .contact-form button { margin-top: 1rem; width: 100%; justify-content: center;}
+        .contact-form button { margin-top: 1rem; width: 100%;}
 
         footer { text-align: center; padding: 2rem; border-top: 1px solid var(--glass-border); margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem;}
 
         /* --- LIGHTBOX --- */
         .modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(11, 17, 32, 0.95); backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.3s ease; }
         .modal.show { display: flex; justify-content: center; align-items: center; opacity: 1; }
-        .modal-content { max-width: 90%; max-height: 85vh; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid var(--glass-border); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); object-fit: contain;}
+        .modal-content { max-width: 95%; max-height: 85vh; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid var(--glass-border); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); object-fit: contain;}
         .modal.show .modal-content { transform: scale(1); }
-        .close-modal { position: absolute; top: 30px; right: 50px; color: white; font-size: 40px; transition: 0.3s; width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);}
-        .close-modal:hover { color: var(--primary); background: var(--accent); transform: scale(1.1) rotate(90deg); cursor: none;}
+        .close-modal { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; transition: 0.3s; width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);}
+        .close-modal:hover { color: var(--primary); background: var(--accent); transform: scale(1.1) rotate(90deg);}
 
-        /* --- RESPONSIVE DESIGN --- */
+        /* =========================================================
+           MOBILE RESPONSIVE OPTIMIZATION
+           ========================================================= */
         @media (max-width: 992px) {
-            .hero-content { flex-direction: column-reverse; text-align: center; justify-content: center; gap: 2rem;}
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 3rem;}
             .hero-text { text-align: center; display: flex; flex-direction: column; align-items: center;}
-            .hero-image { justify-content: center; margin-bottom: 2rem;}
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-image { justify-content: center; }
             .hero h1 { font-size: 3.5rem; }
             .profile-pic { width: 300px; height: 300px; }
-            .contact-container { grid-template-columns: 1fr; }
-            .contact-card { padding: 2.5rem; }
-            .section-title { font-size: 2.2rem; }
-            .section-title::after { left: 25%; }
+            .contact-container { grid-template-columns: 1fr; gap: 3rem;}
         }
+
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .logo-iconic { font-size: 1.4rem; }
-            .ambient-glow { display: none; }
+            .container { padding: 0 1.5rem; }
+            section { padding: 5rem 0; }
+            
+            .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
+            .section-title::after { left: 25%; }
+            .welcome-title { font-size: 2.2rem; }
+            .welcome-title i { font-size: 2.5rem; margin-right: 10px; }
+            
+            .menu-toggle { display: flex; }
+            .nav-links { 
+                position: fixed; top: 0; left: 100%; width: 100%; height: 100vh; 
+                background: rgba(11,17,32,0.98); flex-direction: column; 
+                justify-content: center; align-items: center; gap: 3rem; 
+                transition: left 0.4s ease-in-out; z-index: 1001; 
+            }
+            .nav-links.active { left: 0; }
+            .nav-links a { font-size: 1.5rem; }
+            
+            .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+            .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            .hero { padding-top: 120px; }
             .hero h1 { font-size: 2.8rem; }
+            .typewriter-container { font-size: 1.2rem; margin-bottom: 1.5rem;}
+            .hero p { font-size: 1rem; margin-bottom: 2rem; }
+            .profile-pic { width: 240px; height: 240px; }
+            
+            .hero-buttons { flex-direction: column; width: 100%; gap: 1rem; }
+            .hero-buttons .btn, .hero-buttons .btn-outline { width: 100%; justify-content: center; }
+
+            .glass-card { padding: 2rem 1.5rem; }
+            .about-text p { font-size: 1rem; }
+            .skills-grid, .projects-grid { grid-template-columns: 1fr; gap: 1.5rem;}
+            .skill-item, .project-body { padding: 2rem; }
+            
+            .contact-card { padding: 2rem 1.5rem; border-radius: 20px;}
+            .contact-header h2 { font-size: 2.3rem; }
             .contact-links-grid { grid-template-columns: 1fr; }
-            .close-modal { top: 15px; right: 15px; width: 40px; height: 40px; font-size: 25px;}
+            .contact-form { padding: 1.5rem; background: transparent; border: none;}
         }
     </style>
 </head>
@@ -218,7 +245,7 @@
                 <i class="fas fa-server"></i>
                 <span class="restu">Restu</span><span class="dot">.</span><span class="it">IT</span>
             </h1>
-            <p style="color: #64748b; font-weight: 400; font-family: 'Poppins', sans-serif; letter-spacing: 2px;">INITIALIZING SYSTEM...</p>
+            <p style="color: #64748b; font-weight: 400; font-family: 'Poppins', sans-serif; letter-spacing: 2px; font-size: 0.9rem;">INITIALIZING SYSTEM...</p>
         </div>
     </div>
 
@@ -239,6 +266,13 @@
                 <i class="fas fa-code"></i>
                 <span class="restu">RESTU</span><span class="dot">.</span><span class="it">IT</span>
             </a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
             <ul class="nav-links">
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#skills">Keahlian</a></li>
@@ -259,7 +293,7 @@
                     <span class="typing-text"></span>
                 </div>
 
-                <p class="hero-animate-4">Menjembatani operasional hardware ritel harian dengan inovasi software cerdas. Berpengalaman di Python & Laravel untuk menciptakan infrastruktur IT yang efisien.</p>
+                <p class="hero-animate-4">Menjembatani operasional *hardware* ritel harian dengan inovasi *software* cerdas. Berpengalaman di Python & Laravel untuk menciptakan infrastruktur IT yang efisien.</p>
                 
                 <div class="hero-buttons hero-animate-4">
                     <a href="#contact" class="btn"><i class="fas fa-rocket"></i> Mari Berkolaborasi</a>
@@ -281,8 +315,8 @@
         <section id="about" class="reveal">
             <h2 class="section-title">Tentang Saya</h2>
             <div class="glass-card about-text">
-                <p>Saya adalah <strong>IT Support & Developer</strong> yang berfokus pada keandalan infrastruktur bisnis ritel. Karir saya dibangun di atas pemecahan masalah nyata di lapangan—mulai dari menangani error aplikasi POS, merakit dan memperbaiki PC Kasir, hingga mengonfigurasi jaringan dan CCTV toko.</p>
-                <p>Tidak hanya terpaku pada perbaikan teknis harian, saya memiliki *passion* kuat terhadap <strong>Otomatisasi dan Efisiensi</strong>. Saya mengembangkan sistem monitoring menggunakan script Python dan membangun dashboard berbasis web dengan PHP Laravel untuk mengontrol ratusan cabang secara terpusat, memastikan bisnis berjalan tanpa gangguan (Zero Downtime).</p>
+                <p>Saya adalah <strong>IT Support Specialist</strong> yang berfokus pada keandalan infrastruktur bisnis ritel. Karir saya dibangun di atas pemecahan masalah nyata di lapangan—mulai dari menangani error aplikasi POS, merakit dan memperbaiki PC Kasir, hingga mengonfigurasi jaringan dan CCTV toko.</p>
+                <p>Tidak hanya terpaku pada perbaikan teknis harian, saya memiliki *passion* kuat terhadap <strong>Otomatisasi dan Efisiensi IT</strong>. Saya mengembangkan sistem *monitoring* menggunakan script Python dan membangun *dashboard* berbasis web dengan PHP Laravel untuk mengontrol ratusan cabang secara terpusat, memastikan bisnis berjalan tanpa gangguan (Zero Downtime).</p>
             </div>
         </section>
 
@@ -324,7 +358,7 @@
                     <div class="project-body">
                         <i class="fab fa-python"></i>
                         <h3>Sistem Otomasi Monitoring Toko</h3>
-                        <p>Mengembangkan script pintar berbasis Python yang secara proaktif memantau konektivitas internet ratusan cabang ritel secara real-time, lengkap dengan notifikasi peringatan downtime instan.</p>
+                        <p>Mengembangkan *script* pintar berbasis Python yang secara proaktif memantau konektivitas internet ratusan cabang ritel secara *real-time*, lengkap dengan notifikasi peringatan *downtime* instan.</p>
                     </div>
                 </div>
 
@@ -332,7 +366,7 @@
                     <div class="project-body">
                         <i class="fab fa-laravel"></i>
                         <h3>Web Dashboard IT Support</h3>
-                        <p>Membangun aplikasi portal web central menggunakan framework Laravel untuk memvisualisasikan status kesehatan perangkat keras dan perangkat lunak IT di seluruh ekosistem toko.</p>
+                        <p>Membangun aplikasi portal *web central* menggunakan *framework* Laravel untuk memvisualisasikan status kesehatan perangkat keras dan perangkat lunak IT di seluruh ekosistem toko.</p>
                     </div>
                 </div>
 
@@ -340,7 +374,7 @@
                     <div class="project-body" style="padding-bottom: 0;">
                         <i class="fas fa-tools"></i>
                         <h3>Maintenance & Hardware Repair</h3>
-                        <p>Dokumentasi langsung dari lapangan: Pembersihan total PC kasir, manajemen kabel (cable management), dan perbaikan printer kasir thermal.</p>
+                        <p>Dokumentasi langsung dari lapangan: Pembersihan total PC kasir, manajemen kabel (*cable management*), dan perbaikan printer kasir *thermal*.</p>
                     </div>
                     <div class="repair-gallery">
                         <img src="repair1.jpg" alt="Perbaikan Hardware" class="repair-img clickable-img" onerror="this.src='https://placehold.co/300x200/1e293b/3b82f6?text=PC+Kasir'">
@@ -358,7 +392,7 @@
                     
                     <div class="contact-header">
                         <h2>Mari <br><span style="color: var(--accent);">Berkolaborasi.</span></h2>
-                        <p>Tertarik membahas peluang kerja, proyek web, atau otomasi IT? Hubungi saya melalui media di bawah ini atau kirim pesan langsung.</p>
+                        <p>Tertarik membahas peluang kerja, dukungan otomasi IT, atau infrastruktur? Hubungi saya melalui media di bawah ini atau kirim pesan langsung.</p>
                         
                         <div class="contact-links-grid">
                             <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
@@ -384,7 +418,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy. Designed & Engineered with Passion.</p>
+            <p>&copy; 2026 Restu Arifaldy</p>
         </div>
     </footer>
 
@@ -393,7 +427,24 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // 0. WELCOME OVERLAY
+            // 0. MOBILE HAMBURGER MENU LOGIC
+            const menuToggle = document.querySelector('#mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const navItems = document.querySelectorAll('.nav-links a');
+
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('is-active');
+                navLinks.classList.toggle('active');
+            });
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    menuToggle.classList.remove('is-active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // 1. WELCOME OVERLAY
             const welcomeOverlay = document.getElementById("welcomeOverlay");
             const heroSection = document.getElementById("heroSection");
             const body = document.body;
@@ -407,7 +458,7 @@
                 }, 800); 
             }, 1500); 
 
-            // 1. KURSOR CUSTOM HARDWARE ACCELERATED
+            // 2. KURSOR CUSTOM
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             
@@ -433,21 +484,22 @@
                 });
             }
 
-            // 2. SCROLL REVEAL SMOOTH
+            // 3. SCROLL REVEAL SMOOTH
             function reveal() {
                 if(welcomeOverlay.classList.contains("hide")) {
                     var reveals = document.querySelectorAll(".reveal");
                     for (var i = 0; i < reveals.length; i++) {
                         var windowHeight = window.innerHeight;
                         var elementTop = reveals[i].getBoundingClientRect().top;
-                        if (elementTop < windowHeight - 100) { reveals[i].classList.add("active"); }
+                        var triggerPoint = window.innerWidth <= 768 ? 50 : 100;
+                        if (elementTop < windowHeight - triggerPoint) { reveals[i].classList.add("active"); }
                     }
                 }
             }
             window.addEventListener("scroll", reveal);
 
-            // 3. TYPING EFFECT
-            const texts = ["IT Support Specialist", "Network Automator", "Laravel Web Developer"];
+            // 4. TYPING EFFECT (REVISI TANPA KATA DEVELOPER)
+            const texts = ["IT Support Specialist", "Network Automator", "IT Infrastructure Enthusiast"];
             let count = 0; let index = 0; let currentText = ""; let isDeleting = false;
             const typingElement = document.querySelector(".typing-text");
 
@@ -471,7 +523,7 @@
             }
             setTimeout(type, 2000); 
 
-            // 4. LIGHTBOX / MODAL GAMBAR (KLIK FOTO)
+            // 5. LIGHTBOX / MODAL GAMBAR
             const modal = document.getElementById("imageModal");
             const modalImg = document.getElementById("expandedImg");
             const closeBtn = document.querySelector(".close-modal");
@@ -493,7 +545,7 @@
             closeBtn.addEventListener("click", closeModal);
             modal.addEventListener("click", function(e) { if(e.target === modal) { closeModal(); } });
 
-            // 5. ANIMASI KLIK KARTU (GLOW EFFECT)
+            // 6. ANIMASI KLIK KARTU (GLOW EFFECT)
             const interactiveCards = document.querySelectorAll(".interactive-card");
             interactiveCards.forEach(card => {
                 card.addEventListener("click", function(e) {
