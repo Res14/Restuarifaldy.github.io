@@ -43,15 +43,34 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Scroll Reveal JS (Default Opacity 1 jika JS gagal) */
+        /* Scroll Reveal JS */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- Navigasi --- */
+        /* --- Navigasi & Logo Opsi 3 --- */
         nav { background-color: var(--glass); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; height: 70px; }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-        .logo span { color: var(--secondary); }
+        
+        /* CSS Khusus Logo Bergerak (Opsi 3) */
+        .logo-iconic {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        .logo-iconic i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 1.5rem;
+            transition: all 0.5s ease;
+        }
+        .logo-iconic .dot, .logo-iconic .it { color: var(--secondary); }
+        .logo-iconic:hover i { transform: rotate(360deg); color: var(--primary); }
+        .logo-iconic:hover { transform: scale(1.05); }
+
         .nav-links { display: flex; gap: 2rem; }
         .nav-links a { font-weight: 500; color: var(--text-main); position: relative; }
         .nav-links a:hover { color: var(--secondary); }
@@ -62,7 +81,6 @@
         
         .hero-content { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
-        /* Eksekusi animasi CSS murni untuk Hero */
         .hero-animate-1 { animation: fadeInUp 0.8s ease-out forwards; }
         .hero-animate-2 { animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0; }
         .hero-animate-3 { animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0; }
@@ -82,8 +100,8 @@
         /* --- Konten Bawah --- */
         .about-card { background: white; padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-md); }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .skill-item { background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; transition: var(--transition); }
-        .skill-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border: 1px solid var(--secondary); }
+        .skill-item { background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 1.5rem; transition: var(--transition); border: 1px solid transparent; }
+        .skill-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: rgba(59, 130, 246, 0.3); }
         .skill-icon { font-size: 2rem; color: var(--secondary); background-color: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
         .skill-text h3 { font-size: 1.1rem; color: var(--primary); }
         .skill-text p { font-size: 0.9rem; color: var(--text-muted); }
@@ -99,13 +117,13 @@
         
         .repair-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
         .repair-img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; transition: var(--transition); border: 1px solid #eee; }
-        .repair-img:hover { transform: scale(1.1); }
+        .repair-img:hover { transform: scale(1.1); cursor: pointer; z-index: 10; position: relative;}
 
         .contact-card { background: linear-gradient(to right bottom, #1e293b, #0f172a); color: white; padding: 3rem; border-radius: 16px; text-align: center; box-shadow: var(--shadow-lg); }
         .contact-card h2 { color: white; margin-top: 0; margin-bottom: 1rem; }
         .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
         .contact-btn { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.5rem; background-color: rgba(255,255,255,0.05); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
-        .contact-btn:hover { background-color: rgba(255,255,255,0.1); border-color: var(--accent); }
+        .contact-btn:hover { background-color: rgba(255,255,255,0.1); border-color: var(--accent); transform: translateY(-3px); }
         .contact-btn i { color: var(--accent); }
 
         footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
@@ -113,6 +131,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
+            .logo-iconic { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -120,7 +139,14 @@
 
     <nav>
         <div class="container nav-content">
-            <div class="logo">RESTU<span>.</span>IT</div>
+            
+            <a href="#" class="logo-iconic">
+                <i class="fas fa-server"></i>
+                <span class="restu">Restu</span>
+                <span class="dot">.</span>
+                <span class="it">IT</span>
+            </a>
+
             <ul class="nav-links">
                 <li><a href="#about">Tentang</a></li>
                 <li><a href="#skills">Keahlian</a></li>
@@ -191,8 +217,7 @@
                         <h3>Maintenance Hardware</h3>
                         <div class="repair-gallery">
                             <img src="repair1.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC'">
-                            <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=DVR CCTV'">
-                            <img src="repair3.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=PC POS'">
+                            <img src="repair2.jpg" alt="Perbaikan" class="repair-img" onerror="this.src='https://placehold.co/150x100?text=POS'">
                         </div>
                         <p>Contoh perbaikan hardware ritel: Pembersihan PC kasir, manajemen kabel, dan perbaikan printer thermal.</p>
                     </div>
@@ -203,11 +228,11 @@
         <section id="contact" class="reveal">
             <div class="contact-card">
                 <h2 class="section-title" style="color:white;">Mari Berkolaborasi</h2>
-                <p>Tertarik untuk membahas peluang kerja atau proyek otomatisasi IT? Hubungi saya.</p>
+                <p>Tertarik untuk membahas peluang kerja atau proyek otomatisasi IT ritel? Hubungi saya.</p>
                 <div class="contact-links">
                     <a href="mailto:alldi.restu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> Email</a>
                     <a href="https://linkedin.com/in/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/Res14" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/restuarifaldy" target="_blank" class="contact-btn"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </section>
@@ -215,13 +240,13 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Restu Arifaldy. Crafted with Poppins & Code.</p>
+            <p>&copy; 2026 Restu Arifaldy Code.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. SCROLL REVEAL (Aman jika gagal)
+            // SCROLL REVEAL 
             function reveal() {
                 var reveals = document.querySelectorAll(".reveal");
                 for (var i = 0; i < reveals.length; i++) {
@@ -233,9 +258,9 @@
                 }
             }
             window.addEventListener("scroll", reveal);
-            reveal(); // Trigger saat pertama kali buka
+            reveal(); 
 
-            // 2. TYPING EFFECT
+            // TYPING EFFECT
             const texts = ["IT Support Specialist", "Network Automation Developer", "Laravel Enthusiast"];
             let count = 0;
             let index = 0;
@@ -244,7 +269,7 @@
             const typingElement = document.querySelector(".typing-text");
 
             function type() {
-                if(!typingElement) return; // Mencegah error jika elemen tidak ada
+                if(!typingElement) return; 
                 
                 if (count === texts.length) { count = 0; }
                 currentText = texts[count];
